@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<script src="https://unpkg.com/gojs@3.0.0/release/go.js"></script>
+<h1>
+  Drew's Dynamic Degree Plan Diagram
+</h1>
+<p>
+  Select your Major/Minor Combo to see an interactive tree diagram.
+</p>
+<div id="allSampleContent" class="p-4 w-full">
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<script src="{{ url_for('static', filename='updateDiagram.js') }}"></script>
+<div>
+  <select id="majorDropdown1" onchange="updateDiagram()">
+      <option value="">Select Major 1</option>
+      <option value="BIS">BIS Major</option>
+      <option value="ACC">Accounting Major</option>
+      <!-- Add more options for other majors as needed -->
+  </select>
+  <select id="majorDropdown2" onchange="updateDiagram()">
+      <option value="">Select Major 2</option>
+      <option value="BIS">BIS Major</option>
+      <option value="ACC">Accounting Major</option>
+      <!-- Add more options for other majors as needed -->
+  </select>
+</div>
+<div id="myDiagramDiv" style="border: 1px solid black; margin: 10px; height: 700px; position: relative; -webkit-tap-highlight-color: rgba(255, 255, 255, 0);"><canvas tabindex="0" width="1532" height="872" style="position: absolute; top: 0px; left: 0px; z-index: 2; user-select: none; touch-action: none; width: 1226px; height: 698px;"></canvas><div style="position: absolute; overflow: auto; width: 1226px; height: 698px; z-index: 1;"><div style="position: absolute; width: 1px; height: 1px;"></div></div></div>
+</div>
+</body>
+</html>
