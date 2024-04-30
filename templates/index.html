@@ -1,30 +1,65 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">  
+</head>
 <body>
+  {% if 'username' not in session %}
+  <div class="w3-bar w3-black">
+    <a href="login" class="w3-bar-item w3-button w3-right">Login</a>
+    <a href="register" class="w3-bar-item w3-button w3-right">Register</a>
+  </div>
+  {% endif %}
+  {% if 'username' in session %}
+  <div class="w3-bar w3-black">
+    <span class="w3-bar-item">Hello, {{ session['username'] }}</span>
+  </div>
+{% endif %}
 <script src="https://unpkg.com/gojs@3.0.0/release/go.js"></script>
+<div class = "w3-container">
 <h1>
-  Drew's Dynamic Degree Plan Diagram
+  <strong>Drew's Dynamic Degree Plan Diagram</strong>
 </h1>
-<p>
-  Select your Major/Minor Combo to see an interactive tree diagram.
-</p>
+</div>
+<div class = "w3-container">
+  <p>Select your Major/Minor Combo to see an interactive tree diagram.</p>
+</div>
 <div id="allSampleContent" class="p-4 w-full">
 <script src="{{ url_for('static', filename='script.js') }}"></script>
 <script src="{{ url_for('static', filename='updateDiagram.js') }}"></script>
-<div>
-  <select id="majorDropdown1" onchange="updateDiagram()">
+<div class = "w3-container">
+  <select id="majorDropdown1" name = "major1" onchange="updateDiagram();">
       <option value="">Select Major 1</option>
       <option value="BIS">BIS Major</option>
       <option value="ACC">Accounting Major</option>
-      <!-- Add more options for other majors as needed -->
+      <option value="CSC">Computer Science Major</option>
   </select>
-  <select id="majorDropdown2" onchange="updateDiagram()">
+  <select id="majorDropdown2" name = "major2" onchange="updateDiagram()">
       <option value="">Select Major 2</option>
       <option value="BIS">BIS Major</option>
       <option value="ACC">Accounting Major</option>
-      <!-- Add more options for other majors as needed -->
+      <option value="CSC">Computer Science Major</option>
+    </select>
+  <select id="minorDropdown1" name = "minor1" onchange="updateDiagram()">
+      <option value="">Select Minor 1</option>
+      <option value="BIS_m">BIS Minor</option>
+      <option value="BUAL_m">Business Analytics Minor</option>
+      <option value="ACC_m">Accounting Minor</option>
+      <option value="CSC_m">Computer Science Minor</option>
   </select>
+  <select id="minorDropdown2" name = "minor2" onchange="updateDiagram()">
+      <option value="">Select Minor 2</option>
+      <option value="BIS_m">BIS Minor</option>
+      <option value="BUAL_m">Business Analytics Minor</option>
+      <option value="ACC_m">Accounting Minor</option>
+      <option value="CSC_m">Computer Science Minor</option>
+  </select>
+  <form action="/save" method="post" style="display: inline-block">
+    <input type="hidden" name="data" id="diagramDataInput">
+    <button type="submit">Save Diagram</button>
+  </form>
 </div>
 <div id="myDiagramDiv" style="border: 1px solid black; margin: 10px; height: 700px; position: relative; -webkit-tap-highlight-color: rgba(255, 255, 255, 0);"><canvas tabindex="0" width="1532" height="872" style="position: absolute; top: 0px; left: 0px; z-index: 2; user-select: none; touch-action: none; width: 1226px; height: 698px;"></canvas><div style="position: absolute; overflow: auto; width: 1226px; height: 698px; z-index: 1;"><div style="position: absolute; width: 1px; height: 1px;"></div></div></div>
 </div>
